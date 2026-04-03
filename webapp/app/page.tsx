@@ -1,5 +1,6 @@
 import { getOrders } from './lib/db'
 import Header from './components/Header'
+import Link from 'next/link'
 
 export default async function Home() {
   const orders = await getOrders()
@@ -50,8 +51,49 @@ export default async function Home() {
               ))}
             </tbody>
           </table>
+         
         </div>
       )}
+      <div style={styles.buttonGroup}>
+        <Link href="/customers">
+          <button style={styles.primaryButton}>
+            Select Customer
+          </button>
+        </Link>
+
+        <Link href="/priority">
+          <button style={styles.secondaryButton}>
+            View Priority Queue
+          </button>
+        </Link>
+      </div>
     </main>
   )
+}
+
+const styles = {
+  buttonGroup: {
+    marginTop: '40px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px',
+    alignItems: 'center'
+  },
+  primaryButton: {
+    padding: '14px 24px',
+    borderRadius: '8px',
+    border: 'none',
+    backgroundColor: '#2563eb',
+    color: 'white',
+    fontSize: '16px',
+    cursor: 'pointer'
+  },
+  secondaryButton: {
+    padding: '14px 24px',
+    borderRadius: '8px',
+    border: '1px solid #e5e7eb',
+    backgroundColor: 'white',
+    fontSize: '16px',
+    cursor: 'pointer'
+  }
 }
