@@ -1,0 +1,24 @@
+name: Run ML Scoring
+
+on:
+  workflow_dispatch:
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install joblib pandas psycopg2-binary scikit-learn python-dotenv
+
+      - name: Run scoring
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: python score_production.py
