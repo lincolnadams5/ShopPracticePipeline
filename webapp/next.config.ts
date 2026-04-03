@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Include the pipeline JSON files in the serverless bundle on Vercel
+  outputFileTracingIncludes: {
+    "/*": ["../pipeline/model_metadata.json", "../pipeline/metrics.json"],
+  },
 };
 
 export default nextConfig;
